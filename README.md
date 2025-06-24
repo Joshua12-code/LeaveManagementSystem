@@ -33,12 +33,3 @@ The **Student Leave Management System** is a web application that allows student
 - **Database**: MySQL
 - **Authentication**: JWT (JSON Web Tokens) for secure authentication
 
-## **Installation**
-
-### **Prerequisites**  
-Before you begin, ensure you have the following installed:
-
-- **Node.js** and **npm** (for frontend and backend)
-- **MySQL** (for the database)
-- **Git** (for cloning the repository)
-
