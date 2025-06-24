@@ -29,7 +29,7 @@ The **Student Leave Management System** is a web application that allows student
 ## **Tech Stack**
 
 - **Frontend**: React.js
-- **Backend**: Node.js (Express.js)
+- **Backend**: Springboot
 - **Database**: MySQL
 - **Authentication**: JWT (JSON Web Tokens) for secure authentication
 
