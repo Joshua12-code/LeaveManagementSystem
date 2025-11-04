@@ -134,9 +134,10 @@ CREATE TABLE employees (
 
 ## 📸 Screenshots
 
-| Login Page | Manager Dashboard |
-|-------------|-------------------|
-| ![Login](screenshots/login.png) | ![Dashboard](screenshots/dashboard.png) |
+<img width="1920" height="1200" alt="Screenshot 2025-11-04 155129" src="https://github.com/user-attachments/assets/ef43deeb-4161-4627-801c-8fe816170c4f" />
+<img width="1920" height="1200" alt="Screenshot 2025-11-04 155230" src="https://github.com/user-attachments/assets/30d085cc-768c-495f-a45e-89760baa3e84" />
+<img width="1920" height="1200" alt="Screenshot 2025-11-04 155201" src="https://github.com/user-attachments/assets/945e51f3-c183-4512-8e4b-166f89783f51" />
+
 
 > Add your screenshots inside a folder named `screenshots/` in the project root.
 
