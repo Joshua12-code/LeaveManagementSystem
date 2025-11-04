@@ -4,7 +4,13 @@ A full-stack web application built with **Spring Boot**, **MySQL/PostgreSQL**, a
 This project helps organizations manage employee leave requests efficiently.
 
 🔗 **Live Demo:** [https://leavemanagementsystem-kcww.onrender.com/](https://leavemanagementsystem-kcww.onrender.com/login.html)
+employee 
+email- joshua@example.com
+password - joshua123
 
+manager
+email - kiran@example.com
+password - kiran123
 ---
 
 ## 🚀 Features
