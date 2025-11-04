@@ -33,9 +33,7 @@
         /* 🌟 Company Logo */
         .login-container img {
             width: 150px;
-            /* increased size */
             height: auto;
-            /* keeps proportion */
             margin-bottom: 15px;
             object-fit: contain;
         }
@@ -83,9 +81,25 @@
             background-color: #003580;
         }
 
+        /* 🌟 Credentials Info */
+        .credentials-box {
+            margin-top: 20px;
+            background: #f5f7ff;
+            border: 1px solid #dbe2ff;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: left;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .credentials-box strong {
+            color: #004aad;
+        }
+
         /* 🌟 Footer Text */
         .footer-text {
-            margin-top: 20px;
+            margin-top: 15px;
             font-size: 12px;
             color: #777;
         }
@@ -115,6 +129,18 @@
         <input type="password" id="password" placeholder="Password" />
 
         <button onclick="loginUser()">Login</button>
+
+        <!-- 🌟 Display Credentials -->
+        <div class="credentials-box">
+            <p><strong>Manager Login:</strong><br>
+                Email: kiran@example.com<br>
+                Password: kiran123
+            </p>
+            <p><strong>Employee Login:</strong><br>
+                Email: joshua@example.com<br>
+                Password: joshua123
+            </p>
+        </div>
 
         <div class="footer-text">© 2025 Your Company Name. All rights reserved by JOSHUA.</div>
     </div>
