@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Leave Management - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* 🌟 Overall Page Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #007bff, #00aaff);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 🌟 Login Card */
+        .login-container {
+            background: #fff;
+            padding: 40px 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        /* 🌟 Company Logo */
+        .login-container img {
+            width: 150px;
+            /* increased size */
+            height: auto;
+            /* keeps proportion */
+            margin-bottom: 15px;
+            object-fit: contain;
+        }
+
+        /* 🌟 Heading */
+        .login-container h2 {
+            margin-bottom: 25px;
+            color: #004aad;
+            font-size: 22px;
+            letter-spacing: 0.5px;
+        }
+
+        /* 🌟 Inputs */
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-container input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+        }
+
+        /* 🌟 Login Button */
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #004aad;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #003580;
+        }
+
+        /* 🌟 Footer Text */
+        .footer-text {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* 🌟 Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <!-- 🏢 Logo -->
+        <img src="image/Screenshot 2025-11-04 042140.png" alt="Logo">
+        <h2>Employee Leave Management</h2>
+
+        <input type="text" id="email" placeholder="Email" />
+        <input type="password" id="password" placeholder="Password" />
+
+        <button onclick="loginUser()">Login</button>
+
+        <div class="footer-text">© 2025 Your Company Name. All rights reserved by JOSHUA.</div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+
+</html>

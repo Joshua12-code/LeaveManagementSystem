@@ -1,0 +1,246 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f3f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main card */
+.container {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+/* Input elements */
+input,
+select,
+textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* ✅ Apply Leave button */
+button {
+    display: block;
+    width: 50%;
+    margin: 15px auto 0 auto;
+    padding: 8px 0;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* ✅ Navbar section */
+.navbar {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* ✅ Small Logout button */
+.logout-btn {
+    background-color: white;
+    color: #007bff;
+    border: 1px solid white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #0056b3;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* ✅ Leave table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Status color indicators */
+.pending {
+    color: orange;
+    font-weight: bold;
+}
+
+.approved {
+    color: green;
+    font-weight: bold;
+}
+
+.rejected {
+    color: red;
+    font-weight: bold;
+}
+
+.employee-info {
+    font-size: 14px;
+}
+
+.apply-btn {
+    display: block;
+    width: 40%;
+    margin: 15px auto 0;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.apply-btn:hover {
+    background-color: #0056b3;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .title {
+    margin-right: 30px;
+    /* Space between title and employee info */
+}
+
+.employee-info {
+    font-size: 14px;
+}
+
+.container {
+    flex: 1;
+    /* Push logout to bottom */
+    padding: 20px;
+}
+
+.logout-section {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-top: 1px solid #ccc;
+}
+
+.logout-section button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-section button:hover {
+    background-color: #c82333;
+}
+
+/* ✅ Fix Approve / Reject Buttons visibility */
+.action-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    color: white;
+    cursor: pointer;
+    margin: 4px;
+    transition: all 0.3s ease;
+    width: auto;
+    text-align: center;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+/* ✅ Full green for approve */
+.action-btn.approve {
+    background-color: #28a745;
+}
+
+.action-btn.approve:hover {
+    background-color: #218838;
+}
+
+/* ✅ Full red for reject */
+.action-btn.reject {
+    background-color: #dc3545;
+}
+
+.action-btn.reject:hover {
+    background-color: #c82333;
+}
+
+/* ✅ Ensure table cells expand properly */
+td {
+    vertical-align: middle;
+    overflow: visible;
+}
+
+/* ✅ Company Logo Styling */
+.
+
+/* ✅ Company Logo Styling (Improved) */
+.logo {
+    width: 220px !important;
+    /* increase overall size */
+    height: auto !important;
+    /* keep natural aspect ratio */
+    margin-bottom: 25px;
+    /* space below logo */
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

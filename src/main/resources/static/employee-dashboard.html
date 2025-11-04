@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h2 class="title">Employee Dashboard</h2>
+        <div class="employee-info">
+            <span id="employeeName">Name: Loading...</span> |
+            <span id="employeeId">ID: Loading...</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h3>Apply for Leave</h3>
+
+        <form id="leaveForm" onsubmit="event.preventDefault(); applyLeave();">
+            <select id="leaveType" required>
+                <option value="">-- Select Leave Type --</option>
+                <option value="CASUAL">Casual Leave</option>
+                <option value="SICK">Sick Leave</option>
+                <option value="EARNED">Earned Leave</option>
+                <option value="UNPAID">Unpaid Leave</option>
+            </select>
+
+            <input type="date" id="fromDate" required />
+            <input type="date" id="toDate" required />
+            <textarea id="reason" placeholder="Reason for leave" required></textarea>
+
+            <button type="submit" class="apply-btn">Apply Leave</button>
+        </form>
+
+        <h3>Your Leave History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="leaveHistoryBody">
+                <tr>
+                    <td colspan="5">Loading leave history...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Logout button moved to bottom -->
+    <div class="logout-section">
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script src="js/employee-dashboard.js"></script>
+</body>
+
+</html>
