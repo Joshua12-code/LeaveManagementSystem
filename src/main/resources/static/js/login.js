@@ -27,9 +27,9 @@ async function loginUser() {
 
         // ✅ Redirect based on role
         if (data.role === "MANAGER") {
-            window.location.href = "manager-dashboard.html";
+            window.location.href = "admin-dashboard.html";
         } else {
-            window.location.href = "employee-dashboard.html";
+            window.location.href = "student-dashboard.html";
         }
     } else {
         alert("Invalid login credentials!");
