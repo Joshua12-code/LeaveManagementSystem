@@ -17,4 +17,4 @@ RUN ./mvnw clean package -DskipTests
 EXPOSE 8080
 
 # Run the jar file
-CMD ["java", "-jar", "target/EmployeeLeaveManagement-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/employee-leave-management-0.0.1-SNAPSHOT.jar"]
