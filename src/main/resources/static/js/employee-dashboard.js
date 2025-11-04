@@ -102,6 +102,7 @@ async function loadLeaveHistory() {
                     <td>${l.leaveType}</td>
                     <td>${l.startDate}</td>
                     <td>${l.endDate}</td>
+                    <td>${l.reason || '-'}</td>
                     <td><span class="${l.status?.toLowerCase() || 'pending'}">${l.status}</span></td>
                 </tr>
             `;
