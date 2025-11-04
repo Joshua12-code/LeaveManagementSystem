@@ -3,7 +3,7 @@
 A full-stack web application built with **Spring Boot**, **MySQL/PostgreSQL**, and **HTML/CSS/JavaScript** that allows employees to apply for leave and managers to review and approve requests.  
 This project helps organizations manage employee leave requests efficiently.
 
-🔗 **Live Demo:** [https://leavemanagementsystem-kcww.onrender.com/](https://leavemanagementsystem-kcww.onrender.com/)
+🔗 **Live Demo:** [https://leavemanagementsystem-kcww.onrender.com/](https://leavemanagementsystem-kcww.onrender.com/login.html)
 
 ---
 
