@@ -16,10 +16,8 @@ password - kiran123
 ## 🚀 Features
 
 - 👨‍💼 **Employee Login:** Employees can log in and submit leave applications.  
-- ✅ **Manager Approval:** Managers can review and approve/reject leave requests.  
-- 📅 **Leave Tracking:** Tracks total, used, and remaining leaves per employee.  
-- 🧮 **Automatic Status Update:** Leave status (Approved / Rejected / Pending).  
-- 🧑‍💻 **Admin Control:** Admins can manage users and departments.  
+- ✅ **Manager Approval:** Managers can review and approve/reject leave requests. 
+- 🧮 **Automatic Status Update:** Leave status (Approved / Rejected / Pending).
 - 💾 **Database Integration:** Uses PostgreSQL (or MySQL) for persistent storage.  
 - 🌐 **Deployed on Render (Free Tier)** for public access.
 
