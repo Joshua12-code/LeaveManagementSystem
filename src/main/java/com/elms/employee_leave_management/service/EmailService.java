@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @Service
@@ -28,8 +30,10 @@ public class EmailService {
         }
 
         try {
-            // Build login URL with redirect to leave view
-            String redirectUrl = APP_BASE_URL + "/manager-login.html?redirect=manager-leave-view.html?leaveId=" + leaveRequestId;
+            // Build login URL with redirect to leave view and URL-encode redirect
+            String redirectPath = "manager-leave-view.html?leaveId=" + leaveRequestId;
+            String encodedRedirect = URLEncoder.encode(redirectPath, StandardCharsets.UTF_8);
+            String redirectUrl = APP_BASE_URL + "/manager-login.html?redirect=" + encodedRedirect;
 
             String subject = "New Leave Request from " + employeeName;
             String htmlMessage = "<p>Hello Manager,</p>" +
