@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Leave Request Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            padding: 40px;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .info {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .approve {
+            background-color: #28a745;
+        }
+
+        .reject {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Leave Request Details</h2>
+        <div id="leaveDetails" class="info">Loading leave request...</div>
+        <div style="text-align: center;">
+            <button class="approve" onclick="updateStatus('APPROVED')">Approve</button>
+            <button class="reject" onclick="updateStatus('REJECTED')">Reject</button>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const leaveId = params.get('leaveId');
+        const apiBase = 'http://localhost:8081/api/leaves'; // backend port
+
+        async function loadLeave() {
+            try {
+                const response = await fetch(`${apiBase}/${leaveId}`);
+                if (!response.ok) throw new Error('Leave not found');
+                const data = await response.json();
+
+                document.getElementById('leaveDetails').innerHTML = `
+          <strong>Employee:</strong> ${data.employee.name}<br>
+          <strong>Leave Type:</strong> ${data.leaveType}<br>
+          <strong>From:</strong> ${data.startDate}<br>
+          <strong>To:</strong> ${data.endDate}<br>
+          <strong>Reason:</strong> ${data.reason}<br>
+          <strong>Status:</strong> ${data.status}<br>
+        `;
+            } catch (err) {
+                document.getElementById('leaveDetails').innerText = 'Error loading leave details.';
+            }
+        }
+
+        async function updateStatus(status) {
+            try {
+                await fetch(`${apiBase}/${leaveId}/status?status=${status}`, { method: 'PUT' });
+                alert('Leave ' + status.toLowerCase() + ' successfully.');
+                loadLeave();
+            } catch (err) {
+                alert('Failed to update leave status.');
+            }
+        }
+
+        loadLeave();
+    </script>
+</body>
+
+</html>

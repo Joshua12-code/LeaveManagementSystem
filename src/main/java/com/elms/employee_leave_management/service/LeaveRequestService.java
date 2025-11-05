@@ -7,7 +7,6 @@ import com.elms.employee_leave_management.repository.EmployeeRepository;
 import com.elms.employee_leave_management.repository.LeaveRequestRepository;
 
 import jakarta.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;

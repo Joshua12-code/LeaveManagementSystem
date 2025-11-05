@@ -5,6 +5,7 @@ import com.elms.employee_leave_management.entity.LeaveRequest;
 import com.elms.employee_leave_management.entity.LeaveStatus;
 import com.elms.employee_leave_management.entity.LeaveType;
 import com.elms.employee_leave_management.repository.EmployeeRepository;
+import com.elms.employee_leave_management.service.EmailService;
 import com.elms.employee_leave_management.service.LeaveRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +26,18 @@ public class LeaveRequestController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     @GetMapping
     public List<LeaveRequest> getAllLeaves() {
         return leaveRequestService.getAllLeaveRequests();
+    }
+
+    // ✅ Fetch specific leave by ID (for manager view)
+    @GetMapping("/{id}")
+    public LeaveRequest getLeaveById(@PathVariable Long id) {
+        return leaveRequestService.getLeaveById(id);
     }
 
     @PostMapping("/apply")
@@ -40,11 +50,11 @@ public class LeaveRequestController {
             String toDate = payload.get("toDate").toString();
             String reason = payload.get("reason").toString();
 
-            // ✅ Fetch employee entity
+            // ✅ Fetch employee
             Employee employee = employeeRepository.findById(employeeId)
                     .orElseThrow(() -> new RuntimeException("Employee not found with id: " + employeeId));
 
-            // ✅ Create LeaveRequest
+            // ✅ Create leave request
             LeaveRequest leave = new LeaveRequest();
             leave.setEmployee(employee);
             leave.setLeaveType(LeaveType.valueOf(leaveType.toUpperCase()));
@@ -53,11 +63,20 @@ public class LeaveRequestController {
             leave.setReason(reason);
             leave.setStatus(LeaveStatus.PENDING);
 
-            // ✅ Save
-            leaveRequestService.saveLeaveRequest(leave);
+            // ✅ Save leave
+            LeaveRequest savedLeave = leaveRequestService.saveLeaveRequest(leave);
+
+            // ✅ Send email to manager
+            if (employee.getManager() != null && employee.getManager().getEmail() != null) {
+                emailService.sendLeaveRequestEmail(
+                        employee.getManager().getEmail(),
+                        savedLeave.getId(),
+                        employee.getName()
+                );
+            }
 
             response.put("status", "success");
-            response.put("message", "Leave applied successfully!");
+            response.put("message", "Leave applied successfully and email sent to manager!");
         } catch (Exception e) {
             response.put("status", "error");
             response.put("message", "Failed to apply leave: " + e.getMessage());
