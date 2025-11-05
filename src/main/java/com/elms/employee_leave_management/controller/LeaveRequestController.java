@@ -104,7 +104,7 @@ public class LeaveRequestController {
     // Test email endpoint
     @GetMapping("/test-email")
     public String testEmail() {
-        emailService.sendLeaveRequestEmail("manager@example.com", 0L, "Test Employee");
+        emailService.sendLeaveRequestEmail("manager@example.com ", 0L, "Test Employee");
         return "Check logs for email status!";
     }
 
