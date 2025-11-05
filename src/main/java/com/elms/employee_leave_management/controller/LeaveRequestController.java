@@ -17,7 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/leaves")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "https://leavemanagementsystem-kcww.onrender.com")
 public class LeaveRequestController {
 
     @Autowired

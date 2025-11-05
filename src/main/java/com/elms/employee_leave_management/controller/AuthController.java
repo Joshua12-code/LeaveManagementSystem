@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = {"http://localhost:8080", "https://leavemanagementsystem-kcww.onrender.com"})
 public class AuthController {
 
     private final EmployeeRepository employeeRepository;

@@ -8,7 +8,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
-@CrossOrigin(origins = "http://localhost:3000") // allow React app
+@CrossOrigin(origins = {
+    "http://localhost:3000",
+    "https://leavemanagementsystem-kcww.onrender.com"
+})
 public class EmployeeController {
 
     private final EmployeeService employeeService;
