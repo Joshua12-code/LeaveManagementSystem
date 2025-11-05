@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manager Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-box">
+        <h2>Manager Login</h2>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <script>
+        async function login() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.textContent = '';
+
+            if (!email || !password) {
+                errorMsg.textContent = 'Please enter both email and password.';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8081/api/employees/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    if (data.role === 'MANAGER') {
+                        // Save session
+                        localStorage.setItem('managerId', data.id);
+                        localStorage.setItem('managerEmail', data.email);
+
+                        // Handle redirect after login
+                        const params = new URLSearchParams(window.location.search);
+                        const redirect = params.get('redirect');
+
+                        if (redirect) {
+                            window.location.href = decodeURIComponent(redirect);
+                        } else {
+                            window.location.href = 'manager-dashboard.html';
+                        }
+
+                    } else {
+                        errorMsg.textContent = 'Access denied. Only managers can log in.';
+                    }
+                } else {
+                    errorMsg.textContent = 'Invalid credentials. Please try again.';
+                }
+            } catch (error) {
+                console.error('Login failed:', error);
+                errorMsg.textContent = 'Server error. Please try again later.';
+            }
+        }
+    </script>
+</body>
+
+</html>

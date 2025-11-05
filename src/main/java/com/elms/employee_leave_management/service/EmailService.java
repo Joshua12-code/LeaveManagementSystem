@@ -24,7 +24,8 @@ public class EmailService {
         String message = "Hello Manager,\n\n"
                 + "You have received a new leave request from " + employeeName + ".\n\n"
                 + "👉 Click below to view the request:\n"
-                + appBaseUrl + "/manager-leave-view.html?leaveId=" + leaveRequestId + "\n\n"
+                + appBaseUrl + "/manager-login.html?redirect=manager-leave-view.html?leaveId=" + leaveRequestId + "\n\n"
+
                 + "Best regards,\nEmployee Leave Management System";
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();

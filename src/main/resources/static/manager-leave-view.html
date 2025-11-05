@@ -10,6 +10,7 @@
             background-color: #f4f6f9;
             padding: 40px;
             color: #333;
+            position: relative;
         }
 
         .container {
@@ -48,10 +49,31 @@
         .reject {
             background-color: #dc3545;
         }
+
+        /* 🔹 Logout Button Styling */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
 <body>
+    <!-- 🔹 Logout Button -->
+    <button class="logout-btn" onclick="logout()">Logout</button>
+
     <div class="container">
         <h2>Leave Request Details</h2>
         <div id="leaveDetails" class="info">Loading leave request...</div>
@@ -62,10 +84,18 @@
     </div>
 
     <script>
+        const apiBase = 'http://localhost:8081/api/leaves';
         const params = new URLSearchParams(window.location.search);
         const leaveId = params.get('leaveId');
-        const apiBase = 'http://localhost:8081/api/leaves'; // backend port
 
+        // 🧠 Check login
+        const managerId = localStorage.getItem('managerId');
+        if (!managerId) {
+            const currentUrl = window.location.href;
+            window.location.href = `manager-login.html?redirect=${encodeURIComponent(currentUrl)}`;
+        }
+
+        // 🟢 Load leave details
         async function loadLeave() {
             try {
                 const response = await fetch(`${apiBase}/${leaveId}`);
@@ -73,26 +103,37 @@
                 const data = await response.json();
 
                 document.getElementById('leaveDetails').innerHTML = `
-          <strong>Employee:</strong> ${data.employee.name}<br>
-          <strong>Leave Type:</strong> ${data.leaveType}<br>
-          <strong>From:</strong> ${data.startDate}<br>
-          <strong>To:</strong> ${data.endDate}<br>
-          <strong>Reason:</strong> ${data.reason}<br>
-          <strong>Status:</strong> ${data.status}<br>
-        `;
+                    <strong>Employee:</strong> ${data.employee.name}<br>
+                    <strong>Leave Type:</strong> ${data.leaveType}<br>
+                    <strong>From:</strong> ${data.startDate}<br>
+                    <strong>To:</strong> ${data.endDate}<br>
+                    <strong>Reason:</strong> ${data.reason}<br>
+                    <strong>Status:</strong> ${data.status}<br>
+                `;
             } catch (err) {
-                document.getElementById('leaveDetails').innerText = 'Error loading leave details.';
+                document.getElementById('leaveDetails').innerText = '❌ Error loading leave details.';
             }
         }
 
+        // 🔁 Update leave status
         async function updateStatus(status) {
             try {
-                await fetch(`${apiBase}/${leaveId}/status?status=${status}`, { method: 'PUT' });
-                alert('Leave ' + status.toLowerCase() + ' successfully.');
+                const response = await fetch(`${apiBase}/${leaveId}/status?status=${status}`, {
+                    method: 'PUT'
+                });
+                if (!response.ok) throw new Error('Failed to update leave status');
+                alert(`Leave ${status.toLowerCase()} successfully.`);
                 loadLeave();
             } catch (err) {
-                alert('Failed to update leave status.');
+                alert('❌ Failed to update leave status.');
             }
+        }
+
+        // 🚪 Logout function
+        function logout() {
+            localStorage.removeItem('managerId');
+            alert('You have been logged out.');
+            window.location.href = 'manager-login.html';
         }
 
         loadLeave();
