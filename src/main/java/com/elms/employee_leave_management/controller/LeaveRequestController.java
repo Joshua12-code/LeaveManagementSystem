@@ -69,18 +69,16 @@ public class LeaveRequestController {
             // Save leave
             LeaveRequest savedLeave = leaveRequestService.saveLeaveRequest(leave);
 
-            // Send email to manager only if manager exists, has MANAGER role, and has an email
-            Employee manager = employee.getManager();
-            if (manager != null && manager.getRole() == Role.MANAGER && manager.getEmail() != null) {
-                emailService.sendLeaveRequestEmail(
-                        manager.getEmail(),
-                        savedLeave.getId(),
-                        employee.getName()
-                );
+            // ✅ Send email to all managers
+            List<Employee> managers = employeeRepository.findByRole(Role.MANAGER);
+            for (Employee manager : managers) {
+                if (manager.getEmail() != null && !manager.getEmail().isEmpty()) {
+                    emailService.sendLeaveRequestEmail(manager.getEmail(), savedLeave.getId(), employee.getName());
+                }
             }
 
             response.put("status", "success");
-            response.put("message", "Leave applied successfully and email sent to manager!");
+            response.put("message", "Leave applied successfully and emails sent to all managers!");
         } catch (Exception e) {
             response.put("status", "error");
             response.put("message", "Failed to apply leave: " + e.getMessage());
@@ -104,7 +102,8 @@ public class LeaveRequestController {
     // Test email endpoint
     @GetMapping("/test-email")
     public String testEmail() {
-        emailService.sendLeaveRequestEmail("manager@example.com ", 0L, "Test Employee");
+        // Sends test email to a single address for verification
+        emailService.sendLeaveRequestEmail("manager@example.com", 0L, "Test Employee");
         return "Check logs for email status!";
     }
 

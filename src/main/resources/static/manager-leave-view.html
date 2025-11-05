@@ -50,7 +50,6 @@
             background-color: #dc3545;
         }
 
-        /* 🔹 Logout Button Styling */
         .logout-btn {
             position: absolute;
             top: 20px;
@@ -71,7 +70,6 @@
 </head>
 
 <body>
-    <!-- 🔹 Logout Button -->
     <button class="logout-btn" onclick="logout()">Logout</button>
 
     <div class="container">
@@ -84,18 +82,17 @@
     </div>
 
     <script>
-        const apiBase = 'http://localhost:8081/api/leaves';
+        const apiBase = 'https://leavemanagementsystem-kcww.onrender.com/api/leaves';
         const params = new URLSearchParams(window.location.search);
         const leaveId = params.get('leaveId');
 
-        // 🧠 Check login
+        // Check manager login
         const managerId = localStorage.getItem('managerId');
         if (!managerId) {
             const currentUrl = window.location.href;
             window.location.href = `manager-login.html?redirect=${encodeURIComponent(currentUrl)}`;
         }
 
-        // 🟢 Load leave details
         async function loadLeave() {
             try {
                 const response = await fetch(`${apiBase}/${leaveId}`);
@@ -115,7 +112,6 @@
             }
         }
 
-        // 🔁 Update leave status
         async function updateStatus(status) {
             try {
                 const response = await fetch(`${apiBase}/${leaveId}/status?status=${status}`, {
@@ -129,9 +125,9 @@
             }
         }
 
-        // 🚪 Logout function
         function logout() {
             localStorage.removeItem('managerId');
+            localStorage.removeItem('managerEmail');
             alert('You have been logged out.');
             window.location.href = 'manager-login.html';
         }
