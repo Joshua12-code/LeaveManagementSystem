@@ -25,7 +25,6 @@ public class EmailService {
                 + "You have received a new leave request from " + employeeName + ".\n\n"
                 + "👉 Click below to view the request:\n"
                 + appBaseUrl + "/manager-login.html?redirect=manager-leave-view.html?leaveId=" + leaveRequestId + "\n\n"
-
                 + "Best regards,\nEmployee Leave Management System";
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -34,6 +33,12 @@ public class EmailService {
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
 
-        mailSender.send(mailMessage);
+        try {
+            mailSender.send(mailMessage);
+            System.out.println("✅ Email sent successfully to " + managerEmail);
+        } catch (Exception e) {
+            System.err.println("❌ Failed to send email to " + managerEmail);
+            e.printStackTrace();
+        }
     }
 }

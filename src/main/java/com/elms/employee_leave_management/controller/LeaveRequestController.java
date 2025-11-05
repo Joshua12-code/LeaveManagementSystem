@@ -93,6 +93,11 @@ public class LeaveRequestController {
     public LeaveRequest updateStatus(@PathVariable Long id, @RequestParam String status) {
         return leaveRequestService.updateLeaveStatus(id, status);
     }
+    @GetMapping("/test-email")
+public String testEmail() {
+    emailService.sendLeaveRequestEmail("manager@example.com", 0L, "Test Employee");
+    return "Check logs for email status!";
+}
 
     @DeleteMapping("/{id}")
     public void deleteLeave(@PathVariable Long id) {
