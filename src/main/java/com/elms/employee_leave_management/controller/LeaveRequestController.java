@@ -67,13 +67,16 @@ public class LeaveRequestController {
             LeaveRequest savedLeave = leaveRequestService.saveLeaveRequest(leave);
 
             // ✅ Send email to manager
-            if (employee.getManager() != null && employee.getManager().getEmail() != null) {
-                emailService.sendLeaveRequestEmail(
-                        employee.getManager().getEmail(),
-                        savedLeave.getId(),
-                        employee.getName()
-                );
-            }
+            // ✅ Send email to manager ONLY if role = MANAGER
+Employee manager = employee.getManager();
+if (manager != null && "MANAGER".equalsIgnoreCase(manager.getRole()) && manager.getEmail() != null) {
+    emailService.sendLeaveRequestEmail(
+            manager.getEmail(),
+            savedLeave.getId(),
+            employee.getName()
+    );
+}
+
 
             response.put("status", "success");
             response.put("message", "Leave applied successfully and email sent to manager!");
