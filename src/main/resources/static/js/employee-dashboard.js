@@ -117,3 +117,8 @@ function logout() {
     localStorage.clear();
     window.location.href = "login.html";
 }
+
+// ✅ Open Analytics Page
+function openAnalytics(){
+    window.location.href = "employee-analytics.html";
+}

@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/leaves")
-@CrossOrigin(origins = "https://leavemanagementsystem-kcww.onrender.com")
+@CrossOrigin(origins = {"http://localhost:8080", "https://leavemanagementsystem-kcww.onrender.com"})
 public class LeaveRequestController {
 
     @Autowired
@@ -112,4 +113,68 @@ public class LeaveRequestController {
     public void deleteLeave(@PathVariable Long id) {
         leaveRequestService.deleteLeaveRequest(id);
     }
+
+
+    /* ----------- LEAVE SUMMARY ----------- */
+
+@GetMapping("/leave-summary/{employeeId}")
+public Map<String, Long> getLeaveSummary(@PathVariable Long employeeId) {
+
+    List<LeaveRequest> leaves = leaveRequestService.getLeavesByEmployeeId(employeeId);
+
+    long taken = leaves.stream()
+            .filter(l -> l.getStatus() == LeaveStatus.APPROVED)
+            .count();
+
+    long pending = leaves.stream()
+            .filter(l -> l.getStatus() == LeaveStatus.PENDING)
+            .count();
+
+    long totalLeave = 20; // company policy
+    long remaining = totalLeave - taken;
+
+    Map<String, Long> summary = new HashMap<>();
+    summary.put("taken", taken);
+    summary.put("pending", pending);
+    summary.put("remaining", remaining);
+
+    return summary;
+}
+
+/* ----------- LEAVE TYPE DISTRIBUTION ----------- */
+
+@GetMapping("/leave-types/{employeeId}")
+public Map<String, Long> getLeaveTypes(@PathVariable Long employeeId){
+
+    List<LeaveRequest> leaves = leaveRequestService.getLeavesByEmployeeId(employeeId);
+
+    Map<String, Long> result = new HashMap<>();
+
+    for(LeaveRequest leave : leaves){
+        String type = leave.getLeaveType().toString();
+        result.put(type, result.getOrDefault(type,0L) + 1);
+    }
+
+    return result;
+}
+
+/* ----------- MONTHLY LEAVE TREND ----------- */
+
+@GetMapping("/monthly-leaves/{employeeId}")
+public Map<String, Long> getMonthlyLeaves(@PathVariable Long employeeId){
+
+    List<LeaveRequest> leaves = leaveRequestService.getLeavesByEmployeeId(employeeId);
+
+    Map<String, Long> monthly = new LinkedHashMap<>();
+
+    for(LeaveRequest leave : leaves){
+
+        String month = leave.getStartDate().getMonth().toString();
+
+        monthly.put(month, monthly.getOrDefault(month,0L)+1);
+    }
+
+    return monthly;
+}
+
 }
