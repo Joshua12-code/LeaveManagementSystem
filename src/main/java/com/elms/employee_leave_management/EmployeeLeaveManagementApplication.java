@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EmployeeLeaveManagementApplication {
 
 	public static void main(String[] args) {
+
+		// 🔥 ADD THIS LINE
+		System.out.println("RUNNING FROM: " + System.getProperty("user.dir"));
+
 		SpringApplication.run(EmployeeLeaveManagementApplication.class, args);
 	}
-
 }

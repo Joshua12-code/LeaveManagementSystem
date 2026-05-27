@@ -3,6 +3,7 @@ package com.elms.employee_leave_management.controller;
 import com.elms.employee_leave_management.dto.LoginRequest;
 import com.elms.employee_leave_management.entity.Employee;
 import com.elms.employee_leave_management.repository.EmployeeRepository;
+import com.elms.employee_leave_management.config.JwtUtil;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -10,28 +11,43 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:8080", "https://leavemanagementsystem-kcww.onrender.com"})
+@CrossOrigin(origins = {
+        "http://localhost:8080",
+        "https://leavemanagementsystem-kcww.onrender.com"
+})
 public class AuthController {
 
     private final EmployeeRepository employeeRepository;
+    private final JwtUtil jwtUtil;
 
-    public AuthController(EmployeeRepository employeeRepository) {
+    public AuthController(EmployeeRepository employeeRepository, JwtUtil jwtUtil) {
         this.employeeRepository = employeeRepository;
+        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody LoginRequest loginRequest) {
+
         Map<String, Object> response = new HashMap<>();
 
         return employeeRepository.findByEmail(loginRequest.getEmail())
                 .filter(emp -> emp.getPassword().equals(loginRequest.getPassword()))
                 .map(emp -> {
+
+                    // ✅ Generate JWT Token
+                    String token = jwtUtil.generateToken(emp.getEmail());
+
                     response.put("status", "success");
+                    response.put("token", token); // 🔥 JWT ADDED
                     response.put("role", emp.getRole().toString());
                     response.put("employeeId", emp.getId());
-                    response.put("dashboard", emp.getRole().toString().equals("MANAGER")
-                            ? "manager-dashboard"
-                            : "employee-dashboard");
+
+                    response.put("dashboard",
+                            emp.getRole().toString().equals("MANAGER")
+                                    ? "manager-dashboard"
+                                    : "employee-dashboard"
+                    );
+
                     return response;
                 })
                 .orElseGet(() -> {
